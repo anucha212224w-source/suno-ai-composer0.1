@@ -1,17 +1,19 @@
-/// <reference types="node" />
+// Fix: Resolve Node.js type errors by explicitly importing `cwd` instead of relying on a global `process` object.
+// This removes the need for the `/// <reference types="node" />` directive which was causing an error.
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import { cwd } from 'node:process';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // โหลดไฟล์ env ตาม `mode` ในไดเรกทอรีการทำงานปัจจุบัน
   // พารามิเตอร์ที่สาม '' ทำให้ตัวแปร env ทั้งหมดพร้อมใช้งาน แม้ว่าจะไม่มีคำนำหน้า VITE_
-  const env = loadEnv(mode, process.cwd(), '');
+  const env = loadEnv(mode, cwd(), '');
 
   return {
     plugins: [react()],
     resolve: {
-      // Fix: Corrected 'ts' to '.ts' for proper module resolution.
+      // Fix: Corrected file extension from 'ts' to '.ts'.
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     },
     // ทำให้ตัวแปรสภาพแวดล้อมพร้อมใช้งานในโค้ดฝั่งไคลเอ็นต์
