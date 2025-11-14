@@ -13,7 +13,8 @@ interface AlbumArtGeneratorModalProps {
     onSubmit: (settings: AlbumArtSettings) => void;
     songData: string | null;
     inputs: FormState | null;
-    t: (typeof translations)[Language];
+    // Fix: Corrected the type of 't' to match the props being passed (the 'ui' object).
+    t: (typeof translations)[Language]['ui'];
     language: Language;
 }
 

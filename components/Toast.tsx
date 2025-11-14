@@ -11,10 +11,11 @@ interface ToastProps {
 }
 
 const Toast: React.FC<ToastProps> = ({ toast, onRemove, t }) => {
+    // Fix: Access translation strings from the 'ui' property of the translation object.
     const PREFIXES: Record<ToastType, { text: string; color: string }> = {
-        success: { text: t.toastSuccessPrefix, color: 'text-green-400' },
-        error: { text: t.toastErrorPrefix, color: 'text-red-400' },
-        info: { text: t.toastInfoPrefix, color: 'text-blue-400' },
+        success: { text: t.ui.toastSuccessPrefix, color: 'text-green-400' },
+        error: { text: t.ui.toastErrorPrefix, color: 'text-red-400' },
+        info: { text: t.ui.toastInfoPrefix, color: 'text-blue-400' },
     };
 
     return (
